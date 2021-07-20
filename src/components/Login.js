@@ -1,44 +1,22 @@
 import React, { Component } from 'react';
-import AuthService from '../services/auth.service';
+import { connect } from 'react-redux';
+import handleChange from '../redux/actions/changeActions';
+import fetchUser from '../redux/actions/authActions';
 
 class Login extends Component {
-	service = new AuthService();
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: '',
-			password: ''
-		};
-	}
-
 	handleInputChange = event => {
-		const { name, value } = event.target;
-
-		this.setState({
-			[name]: value
-		});
+		this.props.handleChange(event.target);
 	};
 
 	handleFormSubmit = event => {
 		event.preventDefault();
 
-		const { email, password } = this.state;
-
-		this.service.login(email, password).then(
-			response => {
-				this.setState({
-					email: '',
-					password: ''
-				});
-				this.props.getUser(response);
-				this.props.history.push('/dashboard');
-			},
-			error => console.log(error)
-		);
+		this.props.fetchUser();
+		this.props.history.push('/dashboard');
 	};
 
 	render() {
+		console.log(this.props);
 		return (
 			<form onSubmit={this.handleFormSubmit}>
 				<fieldset>
@@ -76,4 +54,20 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapStateToProps = state => {
+	console.log('STATE');
+	console.log(state);
+	return {
+		change: state.change,
+		loggedInUser: state.loggedInUser
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		handleChange: event => dispatch(handleChange(event)),
+		fetchUser: event => dispatch(fetchUser(event))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
