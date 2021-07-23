@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
 import fetchUser from '../redux/actions/authActions';
 
+import Button from './partials/Button';
+import Input from './partials/Input';
+
 class Login extends Component {
 	handleInputChange = event => {
 		this.props.handleChange(event.target);
@@ -20,32 +23,14 @@ class Login extends Component {
 				<fieldset>
 					<legend>Login</legend>
 					<div className="mb-3">
-						<label htmlFor="email" className="form-label">
-							Email
-						</label>
-						<input
-							type="email"
-							className="form-control"
-							id="email"
-							name="email"
-							onChange={event => this.handleInputChange(event)}
-						/>
+						<Input inputType="email"
+									 onChange={event => this.handleInputChange(event)}/>
 					</div>
 					<div className="mb-3">
-						<label htmlFor="password" className="form-label">
-							Password
-						</label>
-						<input
-							type="password"
-							className="form-control"
-							id="password"
-							name="password"
-							onChange={event => this.handleInputChange(event)}
-						/>
+						<Input inputType="password"
+						onChange={event => this.handleInputChange(event)}/>
 					</div>
-					<button type="submit" className="btn btn-primary">
-						Submit
-					</button>
+					<Button type="submit" buttonText="Submit" />
 				</fieldset>
 			</form>
 		);
