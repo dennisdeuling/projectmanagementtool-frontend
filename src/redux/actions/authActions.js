@@ -7,17 +7,30 @@ const fetchUser = () => async (dispatch, getState) => {
 	});
 
 	try {
-		const { email, password } = getState().changeReducer.change;
+		const { email, password } = getState().change;
 		let service = new AuthService();
 
 		const login = await service.login(email, password);
 		const user = await axios.get(
 			`${process.env.REACT_APP_API_URL}/user/${login._id}`
 		);
+		console.log(user.data);
+
+		const projectmanager = user.data.projectmanagers.map(projectmanager => {
+			const {_id: id, name, email, position } = projectmanager
+			return {
+				id,
+				name,
+				email,
+				position,
+				edit: false
+			}
+		})
 		dispatch({
 			type: 'FETCH_USER_SUCCESS',
 			payload: {
-				user: user.data
+				user: user.data,
+				projectmanagers: [...projectmanager]
 			}
 		});
 	} catch (error) {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import handleChange from '../redux/actions/changeActions';
+import { handleEdit, handleSave } from '../redux/actions/actionActions';
 
 class AdminDashboard extends Component {
 	constructor(props) {
@@ -10,60 +12,10 @@ class AdminDashboard extends Component {
 		};
 	}
 
-	componentDidMount() {
-		// const { _id: id } = this.props.loggedInUser;
-		// axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`).then(
-		// 	response => {
-		// 		const {
-		// 			_id: id,
-		// 			name,
-		// 			email,
-		// 			position,
-		// 			projectmanagers
-		// 		} = response.data;
-		// 		const newProjectmanagers = projectmanagers.map(projectmanager => {
-		// 			const { _id: id, name, email } = projectmanager;
-		// 			const newProjectmanager = {
-		// 				id,
-		// 				name,
-		// 				email
-		// 			};
-		// 			newProjectmanager.edit = false;
-		// 			return newProjectmanager;
-		// 		});
-		//
-		// 		this.setState({
-		// 			loggedInUser: {
-		// 				id,
-		// 				name,
-		// 				email,
-		// 				position
-		// 			},
-		// 			projectmanagers: [...newProjectmanagers]
-		// 		});
-		// 	},
-		// 	error => {
-		// 		console.log(error);
-		// 	}
-		// );
-	}
+	componentDidMount() {}
 
 	editProjectmanager = projectmanagerId => {
-		// const editProjectmanager = this.state.projectmanagers.map(
-		// 	projectmanager => {
-		// 		const { id, name, email } = projectmanager;
-		// 		const newProjectmanager = {
-		// 			id,
-		// 			name,
-		// 			email,
-		// 			edit: projectmanager.id === projectmanagerId
-		// 		};
-		// 		return newProjectmanager;
-		// 	}
-		// );
-		// this.setState({
-		// 	projectmanagers: [...editProjectmanager]
-		// });
+		this.props.handleEdit(projectmanagerId);
 	};
 
 	saveProjectmanager = projectmanager => {
@@ -199,75 +151,78 @@ class AdminDashboard extends Component {
 
 	render() {
 		console.log(this.props);
+
 		let projectmanagerTableBody;
 
-		projectmanagerTableBody = this.state.projectmanagers.map(
-			(projectmanager, index) => {
-				const { id, name, email, edit } = projectmanager;
-				if (edit) {
-					return (
-						<tr key={id}>
-							<th scope="row">{index + 1}</th>
-							<td>
-								<input
-									type="text"
-									className="form-control"
-									id="name"
-									name="name"
-									value={name}
-									onChange={event => this.handleInputChange(event, id)}
-								/>
-							</td>
-							<td>
-								<input
-									type="email"
-									className="form-control"
-									id="email"
-									name="email"
-									value={email}
-									onChange={event => this.handleInputChange(event, id)}
-								/>
-							</td>
-							<td>
-								<button
-									type="button"
-									className="btn btn-primary"
-									value="false"
-									onClick={event => this.saveProjectmanager(projectmanager)}
-								>
-									Save
-								</button>
-							</td>
-						</tr>
-					);
-				} else {
-					return (
-						<tr key={id}>
-							<th scope="row">{index + 1}</th>
-							<td>{name}</td>
-							<td>{email}</td>
-							<td>
-								<button
-									type="button"
-									className="btn btn-primary"
-									value="true"
-									onClick={event => this.editProjectmanager(id)}
-								>
-									Edit
-								</button>
-								<button
-									type="button"
-									className="btn btn-primary"
-									onClick={event => this.deleteProjectmanager(id)}
-								>
-									Delete
-								</button>
-							</td>
-						</tr>
-					);
+		if (this.props.projectmanagers) {
+			projectmanagerTableBody = this.props.projectmanagers.map(
+				(projectmanager, index) => {
+					const { id, name, email, edit } = projectmanager;
+					if (edit) {
+						return (
+							<tr key={id}>
+								<th scope="row">{index + 1}</th>
+								<td>
+									<input
+										type="text"
+										className="form-control"
+										id="name"
+										name="name"
+										value={name}
+										onChange={event => this.handleInputChange(id)}
+									/>
+								</td>
+								<td>
+									<input
+										type="email"
+										className="form-control"
+										id="email"
+										name="email"
+										value={email}
+										onChange={event => this.handleInputChange(id)}
+									/>
+								</td>
+								<td>
+									<button
+										type="button"
+										className="btn btn-primary"
+										value="false"
+										onClick={event => this.saveProjectmanager(projectmanager)}
+									>
+										Save
+									</button>
+								</td>
+							</tr>
+						);
+					} else {
+						return (
+							<tr key={id}>
+								<th scope="row">{index + 1}</th>
+								<td>{name}</td>
+								<td>{email}</td>
+								<td>
+									<button
+										type="button"
+										className="btn btn-primary"
+										value="true"
+										onClick={event => this.props.handleEdit(id)}
+									>
+										Edit
+									</button>
+									<button
+										type="button"
+										className="btn btn-primary"
+										onClick={event => this.deleteProjectmanager(id)}
+									>
+										Delete
+									</button>
+								</td>
+							</tr>
+						);
+					}
 				}
-			}
-		);
+			);
+		}
 
 		return (
 			<div>
@@ -293,7 +248,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="name"
 							name="name"
-							onChange={event => this.handleInputChange(event)}
+							onChange={event => this.props.handleChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -305,7 +260,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="email"
 							name="email"
-							onChange={event => this.handleInputChange(event)}
+							onChange={event => this.props.handleChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -317,7 +272,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="password"
 							name="password"
-							onChange={event => this.handleInputChange(event)}
+							onChange={event => this.props.handleChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -332,16 +287,16 @@ class AdminDashboard extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state);
 	return {
-		// loggedInUser: state.loggedInUser,
-		// projectmanagers: state.projectmanagers
+		loggedInUser: state.loggedInUser,
+		projectmanagers: state.projectmanagers
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// handleChange: event => dispatch(handleChange(event))
+		handleChange: event => dispatch(handleChange(event)),
+		handleEdit: projectmanagerId => dispatch(handleEdit(projectmanagerId))
 	};
 };
 

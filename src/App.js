@@ -6,7 +6,6 @@ import AuthService from './services/auth.service';
 import Login from './components/Login';
 import AdminDashboard from './components/AdminDashboard';
 
-
 class App extends Component {
 	service = new AuthService();
 
@@ -40,21 +39,15 @@ class App extends Component {
 	};
 
 	render() {
-		console.log(this.props);
 		return (
 			<div className="App">
 				<Switch>
 					<Route exact path="/">
 						<Redirect to="login" />
 					</Route>
-					<Route
-						exact
-						path="/dashboard"
-						component={AdminDashboard} />
+					<Route exact path="/dashboard" component={AdminDashboard} />
 
-					<Route exact
-								 path="/login"
-								 component={Login} />
+					<Route exact path="/login" component={Login} />
 				</Switch>
 			</div>
 		);

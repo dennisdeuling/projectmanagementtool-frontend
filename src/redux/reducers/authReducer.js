@@ -14,11 +14,12 @@ const authReducer = (state = initialState, action) => {
 		case 'FETCH_USER_SUCCESS':
 			return {
 				loggedInUser: {
+					id: action.payload.user._id,
 					name: action.payload.user.name,
 					email: action.payload.user.email,
 					position: action.payload.user.position
 				},
-				projectmanagers: [...action.payload.user.projectmanagers],
+				projectmanagers: [...action.payload.projectmanagers],
 				loading: false,
 				error: null
 			};

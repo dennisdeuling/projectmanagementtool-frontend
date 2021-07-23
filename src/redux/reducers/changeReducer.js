@@ -4,14 +4,22 @@ const initialState = {
 
 const changeReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case 'HANDLE_CHANGE':
-			const { email, password } = action.payload;
+		case 'HANDLE_CHANGE_EMAIL':
+			const { email } = action.payload;
 
 			return {
-				...state,
 				change: {
-					email: email ? email : state.change.email,
-					password: password ? password : state.change.password
+					...state.change,
+					email: email
+				}
+			};
+		case 'HANDLE_CHANGE_PASSWORD':
+			const { password } = action.payload;
+
+			return {
+				change: {
+					...state.change,
+					password: password
 				}
 			};
 		default:

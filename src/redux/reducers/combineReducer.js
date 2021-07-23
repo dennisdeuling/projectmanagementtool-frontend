@@ -1,10 +1,15 @@
-import { combineReducers } from 'redux';
+import reduceReducers from 'reduce-reducers';
 import changeReducer from './changeReducer';
 import authReducer from './authReducer';
+import actionReducer from './actionReducer';
 
-const rootRedrucer = combineReducers({
-	changeReducer: changeReducer,
-	authReducer: authReducer
-});
+const initialState = {};
 
-export default rootRedrucer;
+const rootReducer = reduceReducers(
+	initialState,
+	changeReducer,
+	authReducer,
+	actionReducer
+);
+
+export default rootReducer;

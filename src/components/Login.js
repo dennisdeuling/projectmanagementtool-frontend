@@ -10,13 +10,11 @@ class Login extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-
 		this.props.fetchUser();
 		this.props.history.push('/dashboard');
 	};
 
 	render() {
-		console.log(this.props);
 		return (
 			<form onSubmit={this.handleFormSubmit}>
 				<fieldset>
@@ -55,11 +53,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log('STATE');
-	console.log(state);
 	return {
-		change: state.change,
-		loggedInUser: state.loggedInUser
+		change: state.change
 	};
 };
 
