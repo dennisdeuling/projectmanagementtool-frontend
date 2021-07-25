@@ -26,6 +26,7 @@ const changeReducer = (state = initialState, action) => {
 			};
 		case 'HANDLE_CHANGE_NAME':
 			const { name } = action.payload;
+			console.log(name);
 
 			return {
 				...state,

@@ -1,8 +1,6 @@
 const handleChange = event => {
 	const { name, value } = event.target;
 
-	console.log(name);
-
 	switch (name) {
 		case 'email':
 			return {
@@ -20,7 +18,7 @@ const handleChange = event => {
 			};
 		case 'name':
 			return {
-				type: 'HANDLE CHANGE_NAME',
+				type: 'HANDLE_CHANGE_NAME',
 				payload: {
 					[name]: value
 				}
