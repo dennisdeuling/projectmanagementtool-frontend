@@ -22,8 +22,7 @@ const fetchUser = () => async (dispatch, getState) => {
 				id,
 				name,
 				email,
-				position,
-				edit: false
+				position
 			}
 		})
 		dispatch({

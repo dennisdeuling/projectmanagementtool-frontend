@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
-import { handleEdit, handleSave } from '../redux/actions/actionActions';
 
 class AdminDashboard extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			loggedInUser: null,
-			projectmanagers: []
-		};
-	}
 
 	componentDidMount() {}
-
-	editProjectmanager = projectmanagerId => {
-		this.props.handleEdit(projectmanagerId);
-	};
 
 	saveProjectmanager = projectmanager => {
 		// const { id, name, email } = projectmanager;
@@ -157,69 +145,23 @@ class AdminDashboard extends Component {
 		if (this.props.projectmanagers) {
 			projectmanagerTableBody = this.props.projectmanagers.map(
 				(projectmanager, index) => {
-					const { id, name, email, edit } = projectmanager;
-					if (edit) {
-						return (
-							<tr key={id}>
-								<th scope="row">{index + 1}</th>
-								<td>
-									<input
-										type="text"
-										className="form-control"
-										id="name"
-										name="name"
-										value={name}
-										onChange={event => this.handleInputChange(id)}
-									/>
-								</td>
-								<td>
-									<input
-										type="email"
-										className="form-control"
-										id="email"
-										name="email"
-										value={email}
-										onChange={event => this.handleInputChange(id)}
-									/>
-								</td>
-								<td>
-									<button
-										type="button"
-										className="btn btn-primary"
-										value="false"
-										onClick={event => this.saveProjectmanager(projectmanager)}
-									>
-										Save
-									</button>
-								</td>
-							</tr>
-						);
-					} else {
-						return (
-							<tr key={id}>
-								<th scope="row">{index + 1}</th>
-								<td>{name}</td>
-								<td>{email}</td>
-								<td>
-									<button
-										type="button"
-										className="btn btn-primary"
-										value="true"
-										onClick={event => this.props.handleEdit(id)}
-									>
-										Edit
-									</button>
-									<button
-										type="button"
-										className="btn btn-primary"
-										onClick={event => this.deleteProjectmanager(id)}
-									>
-										Delete
-									</button>
-								</td>
-							</tr>
-						);
-					}
+					const { id, name, email } = projectmanager;
+					return (
+						<tr key={id}>
+							<th scope="row">{index + 1}</th>
+							<td>{name}</td>
+							<td>{email}</td>
+							<td>
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={event => this.deleteProjectmanager(id)}
+								>
+									Delete
+								</button>
+							</td>
+						</tr>
+					);
 				}
 			);
 		}
@@ -295,8 +237,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleChange: event => dispatch(handleChange(event)),
-		handleEdit: projectmanagerId => dispatch(handleEdit(projectmanagerId))
+		handleChange: event => dispatch(handleChange(event))
 	};
 };
 
