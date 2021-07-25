@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
-import { handleAdd } from '../redux/actions/actionActions';
+import { handleAdd, handleDelete } from '../redux/actions/actionActions';
 
 class AdminDashboard extends Component {
 	componentDidMount() {}
 
-	deleteProjectmanager = projectmanagerId => {
-		// axios
-		// 	.delete(`${process.env.REACT_APP_API_URL}/user/${projectmanagerId}`)
-		// 	.then(
-		// 		response => {
-		// 			console.log(response.data);
-		// 		},
-		// 		error => {
-		// 			console.log(error);
-		// 		}
-		// 	);
+	deleteProjectmanager = id => {
+		this.props.handleDelete(id);
 	};
 
 	handleInputChange = event => {
@@ -29,7 +20,6 @@ class AdminDashboard extends Component {
 	};
 
 	render() {
-
 		let projectmanagerTableBody;
 
 		if (this.props.projectmanagers) {
@@ -129,7 +119,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		handleChange: event => dispatch(handleChange(event)),
-		handleAdd: event => dispatch(handleAdd(event))
+		handleAdd: event => dispatch(handleAdd(event)),
+		handleDelete: id => dispatch(handleDelete(id))
 	};
 };
 

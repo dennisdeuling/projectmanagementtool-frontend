@@ -14,7 +14,6 @@ const fetchUser = () => async (dispatch, getState) => {
 		const user = await axios.get(
 			`${process.env.REACT_APP_API_URL}/user/${login._id}`
 		);
-		console.log(user.data);
 
 		const projectmanager = user.data.projectmanagers.map(projectmanager => {
 			const {_id: id, name, email, position } = projectmanager

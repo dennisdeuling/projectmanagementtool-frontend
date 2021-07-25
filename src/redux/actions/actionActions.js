@@ -1,39 +1,5 @@
 import axios from 'axios';
 
-// const handleEdit = projectmanagerId => (dispatch, getState) => {
-// 	dispatch({
-// 		type: 'EDIT_REQUEST'
-// 	});
-//
-// 	try {
-// 		const editProjectmanager = getState().projectmanagers.map(
-// 			projectmanager => {
-// 				const { id, name, email, edit } = projectmanager;
-// 				const newProjectmanager = {
-// 					id,
-// 					name,
-// 					email,
-// 					edit: id === projectmanagerId ? !edit : edit
-// 				};
-// 				return newProjectmanager;
-// 			}
-// 		);
-// 		dispatch({
-// 			type: 'EDIT_SUCCESS',
-// 			payload: {
-// 				projectmanagers: [...editProjectmanager]
-// 			}
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: 'EDIT_SUCCESS',
-// 			payload: {
-// 				error
-// 			}
-// 		});
-// 	}
-// };
-
 const handleAdd = () => async (dispatch, getState) => {
 	dispatch({
 		type: 'ADD_REQUEST'
@@ -82,4 +48,32 @@ const handleAdd = () => async (dispatch, getState) => {
 	}
 };
 
-export { handleAdd };
+const handleDelete = id => async (dispatch, getState) => {
+	dispatch({
+		type: 'DELETE_REQUEST'
+	});
+
+	const projectmanagers = getState().projectmanagers;
+
+	try {
+	const deleteUser = await axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}`)
+
+	const newProjectmanagers = projectmanagers.filter(projectmanager => id !== projectmanager.id)
+
+		dispatch({
+			type: 'DELETE_SUCCESS',
+			payload: {
+				projectmanagers: [...newProjectmanagers]
+			}
+		});
+	} catch (error) {
+		dispatch({
+			type: 'ADD_ERROR',
+			payload: {
+				error
+			}
+		});
+	}
+};
+
+export { handleAdd, handleDelete };
