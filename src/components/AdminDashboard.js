@@ -5,6 +5,8 @@ import { handleAdd, handleDelete } from '../redux/actions/actionActions';
 
 import Button from './partials/Button';
 import Input from './partials/Input';
+import TableBody from './partials/table/TableBody';
+import TableHead from './partials/table/TableHead';
 
 class AdminDashboard extends Component {
 	componentDidMount() {}
@@ -29,19 +31,15 @@ class AdminDashboard extends Component {
 			projectmanagerTableBody = this.props.projectmanagers.map(
 				(projectmanager, index) => {
 					const { id, name, email } = projectmanager;
+					console.log(id)
 					return (
-						<tr key={id}>
-							<th scope="row">{index + 1}</th>
-							<td>{name}</td>
-							<td>{email}</td>
-							<td>
-								<Button
-									type="button"
-									buttonText="delete"
-									onClick={event => this.deleteProjectmanager(id)}
-								/>
-							</td>
-						</tr>
+						<TableBody
+							index={index + 1}
+							id={id}
+							name={name}
+							email={email}
+							onClick={id => this.deleteProjectmanager(id)}
+						/>
 					);
 				}
 			);
@@ -51,29 +49,28 @@ class AdminDashboard extends Component {
 			<div>
 				<h1>Manage your Projectmanager</h1>
 				<table className="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Action</th>
-						</tr>
-					</thead>
+					<TableHead headline={['#', 'name', 'email', 'action']} />
 					<tbody>{projectmanagerTableBody}</tbody>
 				</table>
 				<form className="row" onSubmit={this.addNewProjectmanager}>
 					<div className="col-md-3">
-						<Input inputType="text"
-									 label="name"
-									 onChange={event => this.handleInputChange(event)}/>
+						<Input
+							inputType="text"
+							label="name"
+							onChange={event => this.handleInputChange(event)}
+						/>
 					</div>
 					<div className="col-md-3">
-						<Input inputType="email"
-									 onChange={event => this.handleInputChange(event)}/>
+						<Input
+							inputType="email"
+							onChange={event => this.handleInputChange(event)}
+						/>
 					</div>
 					<div className="col-md-3">
-						<Input inputType="password"
-									 onChange={event => this.handleInputChange(event)}/>
+						<Input
+							inputType="password"
+							onChange={event => this.handleInputChange(event)}
+						/>
 					</div>
 					<div className="col-md-3">
 						<Button type="submit" buttonText="add" />
@@ -95,8 +92,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		handleChange: event => dispatch(handleChange(event)),
-		handleAdd: event => dispatch(handleAdd(event)),
-		handleDelete: id => dispatch(handleDelete(id))
+		handleAdd: event => dispatch(handleAdd(event))
 	};
 };
 

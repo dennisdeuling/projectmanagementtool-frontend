@@ -52,6 +52,7 @@ const handleDelete = id => async (dispatch, getState) => {
 	dispatch({
 		type: 'DELETE_REQUEST'
 	});
+	console.log(id)
 
 	const projectmanagers = getState().projectmanagers;
 
