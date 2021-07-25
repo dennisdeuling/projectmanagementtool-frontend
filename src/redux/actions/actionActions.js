@@ -57,7 +57,6 @@ const handleDelete = id => async (dispatch, getState) => {
 
 	try {
 	const deleteUser = await axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}`)
-
 	const newProjectmanagers = projectmanagers.filter(projectmanager => id !== projectmanager.id)
 
 		dispatch({

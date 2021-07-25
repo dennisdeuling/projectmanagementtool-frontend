@@ -8,8 +8,8 @@ const composedEnhancer = composeWithDevTools(applyMiddleware(logger, thunkMiddle
 
 const store = createStore(combineRedrucer, composedEnhancer);
 
-store.subscribe(() => {
-	console.log(store.getState());
-});
+// store.subscribe(() => {
+// 	console.log(store.getState());
+// });
 
 export default store;

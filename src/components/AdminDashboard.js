@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
 import { handleAdd, handleDelete } from '../redux/actions/actionActions';
 
+import Button from './partials/Button';
+import Input from './partials/Input';
+
 class AdminDashboard extends Component {
 	componentDidMount() {}
 
@@ -32,13 +35,11 @@ class AdminDashboard extends Component {
 							<td>{name}</td>
 							<td>{email}</td>
 							<td>
-								<button
+								<Button
 									type="button"
-									className="btn btn-primary"
+									buttonText="delete"
 									onClick={event => this.deleteProjectmanager(id)}
-								>
-									Delete
-								</button>
+								/>
 							</td>
 						</tr>
 					);
@@ -62,45 +63,20 @@ class AdminDashboard extends Component {
 				</table>
 				<form className="row" onSubmit={this.addNewProjectmanager}>
 					<div className="col-md-3">
-						<label htmlFor="name" className="form-label">
-							Name
-						</label>
-						<input
-							type="text"
-							className="form-control"
-							id="name"
-							name="name"
-							onChange={event => this.handleInputChange(event)}
-						/>
+						<Input inputType="text"
+									 label="name"
+									 onChange={event => this.handleInputChange(event)}/>
 					</div>
 					<div className="col-md-3">
-						<label htmlFor="email" className="form-label">
-							Email
-						</label>
-						<input
-							type="email"
-							className="form-control"
-							id="email"
-							name="email"
-							onChange={event => this.handleInputChange(event)}
-						/>
+						<Input inputType="email"
+									 onChange={event => this.handleInputChange(event)}/>
 					</div>
 					<div className="col-md-3">
-						<label htmlFor="password" className="form-label">
-							Password
-						</label>
-						<input
-							type="password"
-							className="form-control"
-							id="password"
-							name="password"
-							onChange={event => this.handleInputChange(event)}
-						/>
+						<Input inputType="password"
+									 onChange={event => this.handleInputChange(event)}/>
 					</div>
 					<div className="col-md-3">
-						<button type="submit" className="btn btn-primary">
-							Add
-						</button>
+						<Button type="submit" buttonText="add" />
 					</div>
 				</form>
 			</div>
