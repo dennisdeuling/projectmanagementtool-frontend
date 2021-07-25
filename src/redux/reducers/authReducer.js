@@ -1,4 +1,5 @@
 const initialState = {
+	change: {},
 	loggedInUser: {},
 	projectmanagers: []
 };
@@ -13,6 +14,7 @@ const authReducer = (state = initialState, action) => {
 			};
 		case 'FETCH_USER_SUCCESS':
 			return {
+				change: {},
 				loggedInUser: {
 					id: action.payload.user._id,
 					name: action.payload.user.name,
@@ -25,6 +27,7 @@ const authReducer = (state = initialState, action) => {
 			};
 		case 'FETCH_USER_FAILURE':
 			return {
+				change: {},
 				loggedInUser: {},
 				projectmanagers: {},
 				loading: false,

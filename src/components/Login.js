@@ -8,7 +8,7 @@ import Input from './partials/Input';
 
 class Login extends Component {
 	handleInputChange = event => {
-		this.props.handleChange(event.target);
+		this.props.handleChange(event);
 	};
 
 	handleFormSubmit = event => {

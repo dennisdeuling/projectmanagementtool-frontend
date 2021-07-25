@@ -3,7 +3,9 @@ import changeReducer from './changeReducer';
 import authReducer from './authReducer';
 import actionReducer from './actionReducer';
 
-const initialState = {};
+const initialState = {
+	change: {}
+};
 
 const rootReducer = reduceReducers(
 	initialState,

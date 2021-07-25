@@ -1,5 +1,5 @@
 const handleChange = event => {
-	const { name, value } = event;
+	const { name, value } = event.target;
 
 	console.log(name);
 
@@ -14,6 +14,13 @@ const handleChange = event => {
 		case 'password':
 			return {
 				type: 'HANDLE_CHANGE_PASSWORD',
+				payload: {
+					[name]: value
+				}
+			};
+		case 'name':
+			return {
+				type: 'HANDLE CHANGE_NAME',
 				payload: {
 					[name]: value
 				}

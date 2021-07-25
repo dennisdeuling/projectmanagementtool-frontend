@@ -8,6 +8,7 @@ const changeReducer = (state = initialState, action) => {
 			const { email } = action.payload;
 
 			return {
+				...state,
 				change: {
 					...state.change,
 					email: email
@@ -17,9 +18,20 @@ const changeReducer = (state = initialState, action) => {
 			const { password } = action.payload;
 
 			return {
+				...state,
 				change: {
 					...state.change,
 					password: password
+				}
+			};
+		case 'HANDLE_CHANGE_NAME':
+			const { name } = action.payload;
+
+			return {
+				...state,
+				change: {
+					...state.change,
+					name: name
 				}
 			};
 		default:

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
 
 class AdminDashboard extends Component {
-
 	componentDidMount() {}
 
 	saveProjectmanager = projectmanager => {
@@ -53,36 +52,8 @@ class AdminDashboard extends Component {
 		// 	);
 	};
 
-	handleInputChange = (event, projectmanagerId) => {
-		// const { name, value } = event.target;
-		// console.log(name, value, projectmanagerId);
-		// if (projectmanagerId) {
-		// 	const newProjectmanagers = this.state.projectmanagers.map(
-		// 		projectmanager => {
-		// 			if (projectmanager.id === projectmanagerId) {
-		// 				projectmanager.name = name === 'name' ? value : projectmanager.name;
-		// 				projectmanager.email =
-		// 					name === 'email' ? value : projectmanager.email;
-		// 			}
-		// 			return projectmanager;
-		// 		}
-		// 	);
-		//
-		// 	this.setState({
-		// 		projectmanagers: [...newProjectmanagers]
-		// 	});
-		// }
-		//
-		// if (!projectmanagerId) {
-		// 	this.setState({
-		// 		loggedInUser: { ...this.state.loggedInUser },
-		// 		projectmanagers: [...this.state.projectmanagers],
-		// 		newProjectmanager: {
-		// 			...this.state.newProjectmanager,
-		// 			[name]: value
-		// 		}
-		// 	});
-		// }
+	handleInputChange = event => {
+		this.props.handleChange(event);
 	};
 
 	addNewProjectmanager = event => {
@@ -190,7 +161,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="name"
 							name="name"
-							onChange={event => this.props.handleChange(event)}
+							onChange={event => this.handleInputChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -202,7 +173,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="email"
 							name="email"
-							onChange={event => this.props.handleChange(event)}
+							onChange={event => this.handleInputChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -214,7 +185,7 @@ class AdminDashboard extends Component {
 							className="form-control"
 							id="password"
 							name="password"
-							onChange={event => this.props.handleChange(event)}
+							onChange={event => this.handleInputChange(event)}
 						/>
 					</div>
 					<div className="col-md-3">
@@ -230,6 +201,7 @@ class AdminDashboard extends Component {
 
 const mapStateToProps = state => {
 	return {
+		change: state.change,
 		loggedInUser: state.loggedInUser,
 		projectmanagers: state.projectmanagers
 	};
