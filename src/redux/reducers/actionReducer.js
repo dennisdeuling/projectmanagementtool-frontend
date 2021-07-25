@@ -3,18 +3,18 @@ const initialState = {
 
 const actionReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case 'EDIT_REQUEST':
+		case 'ADD_REQUEST':
 			return {
 				...state,
 				error: null
 			};
-		case 'EDIT_SUCCESS':
+		case 'ADD_SUCCESS':
 			return {
 				...state,
 				projectmanagers: [...action.payload.projectmanagers],
 				error: null
 			};
-		case 'EDIT_FAILURE':
+		case 'ADD_ERROR':
 			return {
 				...state,
 				error: action.payload.error

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import handleChange from '../redux/actions/changeActions';
+import { handleAdd } from '../redux/actions/actionActions';
 
 class AdminDashboard extends Component {
 	componentDidMount() {}
 
-	saveProjectmanager = projectmanager => {
+	saveProjectmanager = event => {
 		// const { id, name, email } = projectmanager;
 		//
 		// axios
@@ -57,55 +58,8 @@ class AdminDashboard extends Component {
 	};
 
 	addNewProjectmanager = event => {
-		// const { name, email, password } = this.state.newProjectmanager;
-		// event.preventDefault();
-		//
-		// axios
-		// 	.post(
-		// 		`${process.env.REACT_APP_API_URL}/user/create`,
-		// 		{
-		// 			name,
-		// 			email,
-		// 			password
-		// 		},
-		// 		{ withCredentials: true }
-		// 	)
-		// 	.then(
-		// 		response => {
-		// 			const { _id: id, name, email } = response.data;
-		// 			this.setState({
-		// 				newProjectmanager: {
-		// 					id,
-		// 					name,
-		// 					email
-		// 				}
-		// 			});
-		// 		},
-		// 		error => {
-		// 			console.log(error);
-		// 		}
-		// 	);
-		//
-		// axios
-		// 	.put(
-		// 		`${process.env.REACT_APP_API_URL}/user/${this.state.loggedInUser.id}`,
-		// 		{
-		// 			$push: {
-		// 				projectmanagers: this.state.newProjectmanager.id
-		// 			}
-		// 		},
-		// 		{
-		// 			withCredentials: true
-		// 		}
-		// 	)
-		// 	.then(
-		// 		response => {
-		// 			console.log(response.data);
-		// 		},
-		// 		error => {
-		// 			console.log(error);
-		// 		}
-		// 	);
+		event.preventDefault();
+		this.props.handleAdd(event);
 	};
 
 	render() {
@@ -209,7 +163,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleChange: event => dispatch(handleChange(event))
+		handleChange: event => dispatch(handleChange(event)),
+		handleAdd: event => dispatch(handleAdd(event))
 	};
 };
 
