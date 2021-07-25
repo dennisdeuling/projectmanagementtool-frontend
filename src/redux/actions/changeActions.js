@@ -1,5 +1,5 @@
 const handleChange = event => {
-	const { name, value } = event.target;
+	let { name, value } = event.target;
 
 	switch (name) {
 		case 'email':

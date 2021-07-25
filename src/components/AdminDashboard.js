@@ -6,40 +6,6 @@ import { handleAdd } from '../redux/actions/actionActions';
 class AdminDashboard extends Component {
 	componentDidMount() {}
 
-	saveProjectmanager = event => {
-		// const { id, name, email } = projectmanager;
-		//
-		// axios
-		// 	.put(
-		// 		`${process.env.REACT_APP_API_URL}/user/${id}`,
-		// 		{
-		// 			name,
-		// 			email
-		// 		},
-		// 		{
-		// 			withCredentials: true
-		// 		}
-		// 	)
-		// 	.then(
-		// 		response => {
-		// 			const newProjectmanagers = this.state.projectmanagers.map(
-		// 				projectmanager => {
-		// 					if (projectmanager.id === id) {
-		// 						projectmanager.edit = false;
-		// 					}
-		// 					return projectmanager;
-		// 				}
-		// 			);
-		// 			this.setState({
-		// 				projectmanagers: [...newProjectmanagers]
-		// 			});
-		// 		},
-		// 		error => {
-		// 			console.log(error);
-		// 		}
-		// 	);
-	};
-
 	deleteProjectmanager = projectmanagerId => {
 		// axios
 		// 	.delete(`${process.env.REACT_APP_API_URL}/user/${projectmanagerId}`)
@@ -63,7 +29,6 @@ class AdminDashboard extends Component {
 	};
 
 	render() {
-		console.log(this.props);
 
 		let projectmanagerTableBody;
 
