@@ -40,7 +40,7 @@ const handleAdd = () => async (dispatch, getState) => {
 	});
 
 	const { name, email, password } = getState().change;
-	const { loggedInUserId } = getState().loggedInUser.id;
+	const { id: loggedInUserId } = getState().loggedInUser;
 	const { projectmanagers } = getState();
 
 	try {
@@ -54,7 +54,7 @@ const handleAdd = () => async (dispatch, getState) => {
 			{ withCredentials: true }
 		);
 
-		axios.put(
+		await axios.put(
 			`${process.env.REACT_APP_API_URL}/user/${loggedInUserId}`,
 			{
 				$push: {
