@@ -36,16 +36,17 @@ class DatabaseService {
 			.catch(error => error);
 	};
 
-	updateOne = id => {
+	deleteOne = id => {
 		return axios
-			.put(this.apiUrl)
+			.delete(`${this.apiUrl}/${id}`)
 			.then(response => response.data)
 			.catch(error => error);
 	};
 
-	deleteOne = id => {
+	// TODO: Have to push data for the update
+	updateOne = id => {
 		return axios
-			.delete(this.apiUrl)
+			.put(this.apiUrl)
 			.then(response => response.data)
 			.catch(error => error);
 	};

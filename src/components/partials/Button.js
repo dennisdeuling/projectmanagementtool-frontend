@@ -6,7 +6,6 @@ function Button({ ...props }) {
 	const buttonText =
 		props.buttonText.charAt(0).toUpperCase() + props.buttonText.slice(1);
 
-	console.log(props);
 	switch (type) {
 		case 'submit':
 			return (

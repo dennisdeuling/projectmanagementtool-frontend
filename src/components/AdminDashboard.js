@@ -31,14 +31,13 @@ class AdminDashboard extends Component {
 			projectmanagerTableBody = this.props.projectmanagers.map(
 				(projectmanager, index) => {
 					const { id, name, email } = projectmanager;
-					console.log(id)
 					return (
 						<TableBody
 							index={index + 1}
 							id={id}
 							name={name}
 							email={email}
-							onClick={id => this.deleteProjectmanager(id)}
+							onClick={() => this.deleteProjectmanager(id)}
 						/>
 					);
 				}
@@ -92,7 +91,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		handleChange: event => dispatch(handleChange(event)),
-		handleAdd: event => dispatch(handleAdd(event))
+		handleAdd: event => dispatch(handleAdd(event)),
+		handleDelete: event => dispatch(handleDelete(event))
 	};
 };
 

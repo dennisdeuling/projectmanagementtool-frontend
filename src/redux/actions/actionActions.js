@@ -1,4 +1,5 @@
 import axios from 'axios';
+import DatabaseService from '../../services/database.service';
 
 const handleAdd = () => async (dispatch, getState) => {
 	dispatch({
@@ -52,13 +53,17 @@ const handleDelete = id => async (dispatch, getState) => {
 	dispatch({
 		type: 'DELETE_REQUEST'
 	});
-	console.log(id)
+	console.log(id);
 
 	const projectmanagers = getState().projectmanagers;
 
 	try {
-	const deleteUser = await axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}`)
-	const newProjectmanagers = projectmanagers.filter(projectmanager => id !== projectmanager.id)
+		let deleteUser = new DatabaseService('user');
+		deleteUser.deleteOne(id);
+
+		const newProjectmanagers = projectmanagers.filter(
+			projectmanager => id !== projectmanager.id
+		);
 
 		dispatch({
 			type: 'DELETE_SUCCESS',
