@@ -7,6 +7,9 @@ import Login from './components/views/Login';
 import AdminDashboard from './components/views/AdminDashboard';
 import ProjectmanagerDetailView from './components/views/ProjectmanagerDetailView';
 import ProjectmanagerDashboard from './components/views/ProjectmanagerDashboard';
+import ClientDetailView from './components/views/ClientDetailView';
+import ProjectDetailView from './components/views/ProjectDetailView';
+import TicketDetailView from './components/views/TicketDetailView';
 
 class App extends Component {
 	service = new AuthService();
@@ -77,17 +80,17 @@ class App extends Component {
 					<Route
 						exact
 						path="/client/:id"
-						component={ProjectmanagerDetailView}
+						component={ClientDetailView}
 					/>
 					<Route
 						exact
 						path="/project/:id"
-						component={ProjectmanagerDetailView}
+						component={ProjectDetailView}
 					/>
 					<Route
 						exact
 						path="/ticket/:id"
-						component={ProjectmanagerDetailView}
+						component={TicketDetailView}
 					/>
 
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ProjectDetailView extends Component {
+class TicketDetailView extends Component {
 	render() {
 		return (
 			<div>
-				
+
 			</div>
 		);
 	}
 }
 
-export default ProjectDetailView;
+export default TicketDetailView;
