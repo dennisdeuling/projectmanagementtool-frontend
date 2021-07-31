@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import handleChange from '../redux/actions/changeActions';
-import { handleAdd, handleDelete } from '../redux/actions/actionActions';
+import handleChange from '../../redux/actions/changeActions';
+import { handleAdd, handleDelete } from '../../redux/actions/actionActions';
 
-import Button from './partials/Button';
-import Input from './partials/Input';
-import TableBody from './partials/table/TableBody';
-import TableHead from './partials/table/TableHead';
+import Button from '../partials/Button';
+import Input from '../partials/Input';
+import TableBody from '../partials/table/TableBody';
+import TableHead from '../partials/table/TableHead';
 
 class AdminDashboard extends Component {
-	componentDidMount() {}
+	componentDidMount() {
+
+	}
 
 	deleteProjectmanager = id => {
 		this.props.handleDelete(id);
@@ -33,6 +35,7 @@ class AdminDashboard extends Component {
 					const { id, name, email } = projectmanager;
 					return (
 						<TableBody
+							model="projectmanager"
 							index={index + 1}
 							id={id}
 							name={name}
@@ -46,7 +49,7 @@ class AdminDashboard extends Component {
 
 		return (
 			<div>
-				<h1>Manage your Projectmanager</h1>
+				<h1>Manage your Projectmanagers</h1>
 				<table className="table">
 					<TableHead headline={['#', 'name', 'email', 'action']} />
 					<tbody>{projectmanagerTableBody}</tbody>

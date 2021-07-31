@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import handleChange from '../redux/actions/changeActions';
-import fetchUser from '../redux/actions/authActions';
+import handleChange from '../../redux/actions/changeActions';
+import fetchUser from '../../redux/actions/authActions';
 
-import Button from './partials/Button';
-import Input from './partials/Input';
+import Button from '../partials/Button';
+import Input from '../partials/Input';
 
 class Login extends Component {
 	handleInputChange = event => {

@@ -3,8 +3,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AuthService from './services/auth.service';
 
-import Login from './components/Login';
-import AdminDashboard from './components/AdminDashboard';
+import Login from './components/views/Login';
+import AdminDashboard from './components/views/AdminDashboard';
+import ProjectmanagerDetailView from './components/views/ProjectmanagerDetailView';
+import ProjectmanagerDashboard from './components/views/ProjectmanagerDashboard';
 
 class App extends Component {
 	service = new AuthService();
@@ -39,13 +41,55 @@ class App extends Component {
 	};
 
 	render() {
+		console.log(this.props);
+
+		let renderPosition;
+
+		if (this.props.loggedInUser) {
+			const { position } = this.props.loggedInUser;
+			switch (position) {
+				case 'admin':
+					renderPosition = (
+						<Route exact path="/dashboard" component={AdminDashboard} />
+					);
+					break;
+				case 'projectmanager':
+					renderPosition = (
+						<Route exact path="/dashboard" component={ProjectmanagerDashboard} />
+					);
+					break;
+				default:
+					break;
+			}
+		}
 		return (
 			<div className="App">
 				<Switch>
 					<Route exact path="/">
 						<Redirect to="login" />
 					</Route>
-					<Route exact path="/dashboard" component={AdminDashboard} />
+					{renderPosition}
+					<Route
+						exact
+						path="/projectmanager/:id"
+						component={ProjectmanagerDetailView}
+					/>
+					<Route
+						exact
+						path="/client/:id"
+						component={ProjectmanagerDetailView}
+					/>
+					<Route
+						exact
+						path="/project/:id"
+						component={ProjectmanagerDetailView}
+					/>
+					<Route
+						exact
+						path="/ticket/:id"
+						component={ProjectmanagerDetailView}
+					/>
+
 
 					<Route exact path="/login" component={Login} />
 				</Switch>
@@ -56,8 +100,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
 	return {
-		// loggedInUser: state.loggedInUser,
-		// projectmanagers: state.projectmanagers
+		loggedInUser: state.loggedInUser
 	};
 };
 

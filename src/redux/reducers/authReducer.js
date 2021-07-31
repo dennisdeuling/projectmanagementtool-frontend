@@ -19,7 +19,11 @@ const authReducer = (state = initialState, action) => {
 					id: action.payload.user._id,
 					name: action.payload.user.name,
 					email: action.payload.user.email,
-					position: action.payload.user.position
+					position: action.payload.user.position,
+					// passwordHashed: action.payload.user.passwordHashed,
+					clients: action.payload.user.clients,
+					projects: action.payload.user.projects,
+					tickets: action.payload.user.tickets
 				},
 				projectmanagers: [...action.payload.projectmanagers],
 				loading: false,

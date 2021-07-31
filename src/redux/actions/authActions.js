@@ -16,12 +16,15 @@ const fetchUser = () => async (dispatch, getState) => {
 		);
 
 		const projectmanager = user.data.projectmanagers.map(projectmanager => {
-			const {_id: id, name, email, position } = projectmanager
+			const {_id: id, name, email, position, clients, projects, tickets } = projectmanager
 			return {
 				id,
 				name,
 				email,
-				position
+				position,
+				clients,
+				projects,
+				tickets
 			}
 		})
 		dispatch({
