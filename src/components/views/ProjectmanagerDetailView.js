@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 class ProjectmanagerDetailView extends Component {
 	render() {
-
 		return (
 			<div>
 				<h1>{this.props.projectmanager.name}</h1>
@@ -30,8 +29,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleChange: event => dispatch(handleChange(event)),
-		fetchProjectmanager: event => dispatch(fetchProjectmanager(event))
+		handleChange: event => dispatch(handleChange(event))
 	};
 };
 

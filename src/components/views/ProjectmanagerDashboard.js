@@ -38,8 +38,8 @@ class ProjectmanagerDashboard extends Component {
 			);
 		});
 
-		const ticketsTableBody = projects.map((tickets, index) => {
-			const { _id: id, title, description } = tickets;
+		const ticketsTableBody = tickets.map((ticket, index) => {
+			const { _id: id, title, description } = ticket;
 			return (
 				<TableBody
 					model="ticket"
@@ -66,7 +66,7 @@ class ProjectmanagerDashboard extends Component {
 				<h3>Projects</h3>
 				<table className="table">
 					<TableHead
-						headline={['#', 'title', 'description', 'Tickets', 'action']}
+						headline={['#', 'title', 'description', 'tickets', 'action']}
 					/>
 					<tbody>{projectsTableBody}</tbody>
 				</table>

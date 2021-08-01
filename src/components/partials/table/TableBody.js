@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function TableBody({ ...props }) {
 	const { index, id, name, model } = props;
 	const { title, description } = props;
+
 	let renderModel;
 
 	switch (model) {
@@ -19,7 +20,6 @@ function TableBody({ ...props }) {
 			break;
 		case 'client':
 			const { city, street, zipcode } = props;
-			console.log(props)
 			renderModel = (
 				<React.Fragment>
 					<td>{name}</td>
