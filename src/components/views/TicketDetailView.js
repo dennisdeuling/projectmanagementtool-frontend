@@ -16,7 +16,7 @@ class TicketDetailView extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const { id: ticketId } = ownProps.match.params;
-	const ticket = state.loggedInUser.tickets.find(
+	const ticket = state.tickets.find(
 		ticket => ticket._id === ticketId
 	);
 	return {

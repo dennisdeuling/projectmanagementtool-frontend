@@ -16,7 +16,7 @@ class ProjectDetailView extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const { id: projectId } = ownProps.match.params;
-	const project = state.loggedInUser.projects.find(
+	const project = state.projects.find(
 		project => project._id === projectId
 	);
 	return {

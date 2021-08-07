@@ -27,7 +27,8 @@ class ClientDetailView extends Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const { id: clientId } = ownProps.match.params;
-	const client = state.loggedInUser.clients.find(
+
+	const client = state.clients.find(
 		client => client._id === clientId
 	);
 	return {
