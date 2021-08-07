@@ -7,7 +7,7 @@ const handleAdd = () => async (dispatch, getState) => {
 	});
 
 	const { name, email, password } = getState().change;
-	const { id: loggedInUserId } = getState().loggedInUser;
+	const { _id: loggedInUserId } = getState().loggedInUser;
 	const { projectmanagers } = getState();
 
 	try {
