@@ -49,31 +49,33 @@ const handleAdd = () => async (dispatch, getState) => {
 	}
 };
 
-const handleDelete = id => async (dispatch, getState) => {
+const handleDelete = data => async (dispatch, getState) => {
+	const { id, model } = data;
 	dispatch({
-		type: 'DELETE_REQUEST'
+		type: 'DELETE_REQUEST',
+		model: model
 	});
-	console.log(id);
-
-	const projectmanagers = getState().projectmanagers;
 
 	try {
-		let deleteUser = new DatabaseService('user');
-		deleteUser.deleteOne(id);
+		const dataModel = `${model}s`;
+		let state = getState()[dataModel];
 
-		const newProjectmanagers = projectmanagers.filter(
-			projectmanager => id !== projectmanager.id
-		);
+		let deleteData = new DatabaseService(model);
+		deleteData.deleteOne(id);
+
+		const newData = state.filter(data => id !== data._id);
 
 		dispatch({
 			type: 'DELETE_SUCCESS',
+			model: model,
 			payload: {
-				projectmanagers: [...newProjectmanagers]
+				newData: [...newData]
 			}
 		});
 	} catch (error) {
 		dispatch({
-			type: 'ADD_ERROR',
+			type: 'DELETE_ERROR',
+			model: model,
 			payload: {
 				error
 			}

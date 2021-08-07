@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TableBody from '../partials/table/TableBody';
 import TableHead from '../partials/table/TableHead';
+import { handleDelete } from '../../redux/actions/actionActions';
 
 class ProjectmanagerDashboard extends Component {
+
+	deleteData = (id, model) => {
+		const data = {id, model}
+		this.props.handleDelete(data)
+	}
+
+
 	render() {
-		const { clients, projects, tickets } = this.props.loggedInUser;
+		const { clients, projects, tickets } = this.props;
 
 		const clientsTableBody = clients.map((client, index) => {
 			const { _id: id, name } = client;
@@ -19,6 +27,7 @@ class ProjectmanagerDashboard extends Component {
 					zipcode={zipCode}
 					city={city}
 					street={street}
+					onClick={() => this.deleteData(id, 'client')}
 				/>
 			);
 		});
@@ -34,6 +43,7 @@ class ProjectmanagerDashboard extends Component {
 					title={title}
 					description={description}
 					amountOfTickets={amountOfTickets}
+					onClick={() => this.deleteData(id, 'project')}
 				/>
 			);
 		});
@@ -47,6 +57,7 @@ class ProjectmanagerDashboard extends Component {
 					id={id}
 					title={title}
 					description={description}
+					onClick={() => this.deleteData(id, 'ticket')}
 				/>
 			);
 		});
@@ -83,8 +94,17 @@ class ProjectmanagerDashboard extends Component {
 
 const mapStateToProps = state => {
 	return {
-		loggedInUser: state.loggedInUser
+		loggedInUser: state.loggedInUser,
+		clients: state.clients,
+		projects: state.projects,
+		tickets: state.tickets
 	};
 };
 
-export default connect(mapStateToProps)(ProjectmanagerDashboard);
+const mapDispatchToProps = dispatch => {
+	return {
+		handleDelete: event => dispatch(handleDelete(event))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectmanagerDashboard);

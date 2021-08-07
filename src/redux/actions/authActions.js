@@ -16,9 +16,9 @@ const fetchUser = () => async (dispatch, getState) => {
 		);
 
 		const projectmanager = user.data.projectmanagers.map(projectmanager => {
-			const {_id: id, name, email, position, clients, projects, tickets } = projectmanager
+			const {_id, name, email, position, clients, projects, tickets } = projectmanager
 			return {
-				id,
+				_id,
 				name,
 				email,
 				position,
@@ -30,8 +30,7 @@ const fetchUser = () => async (dispatch, getState) => {
 		dispatch({
 			type: 'FETCH_USER_SUCCESS',
 			payload: {
-				user: user.data,
-				projectmanagers: [...projectmanager]
+				loggedInUser: user.data
 			}
 		});
 	} catch (error) {

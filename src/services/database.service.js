@@ -5,6 +5,7 @@ class DatabaseService {
 		model = model.toLowerCase();
 		switch (model) {
 			case 'user':
+			case'projectmanager':
 				this.apiUrl = `${process.env.REACT_APP_API_URL}/user`;
 				break;
 			case 'client':

@@ -9,12 +9,9 @@ import TableBody from '../partials/table/TableBody';
 import TableHead from '../partials/table/TableHead';
 
 class AdminDashboard extends Component {
-	componentDidMount() {
-
-	}
-
-	deleteProjectmanager = id => {
-		this.props.handleDelete(id);
+	deleteProjectmanager = (id, model) => {
+		const data = {id, model}
+		this.props.handleDelete(data);
 	};
 
 	handleInputChange = event => {
@@ -32,7 +29,7 @@ class AdminDashboard extends Component {
 		if (this.props.projectmanagers) {
 			projectmanagerTableBody = this.props.projectmanagers.map(
 				(projectmanager, index) => {
-					const { id, name, email } = projectmanager;
+					const { _id: id, name, email } = projectmanager;
 					return (
 						<TableBody
 							model="projectmanager"
@@ -40,7 +37,7 @@ class AdminDashboard extends Component {
 							id={id}
 							name={name}
 							email={email}
-							onClick={() => this.deleteProjectmanager(id)}
+							onClick={() => this.deleteProjectmanager(id, 'projectmanager')}
 						/>
 					);
 				}

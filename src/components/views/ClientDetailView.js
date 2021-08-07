@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class ClientDetailView extends Component {
 	render() {
-		console.log(this.props);
 		const { name } = this.props.client;
 		const {
 			streetAndHousenr: street,

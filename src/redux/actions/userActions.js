@@ -14,7 +14,7 @@ const fetchProjectmanager = id => async (dispatch, getState) => {
 			type: 'FETCH_PROJECTMANAGER_SUCCESS',
 			payload: {
 				projectmanager: {
-					id: fetchProjectmanager._id,
+					_id: fetchProjectmanager._id,
 					name: fetchProjectmanager.name,
 					email: fetchProjectmanager.email,
 					position: fetchProjectmanager.position,

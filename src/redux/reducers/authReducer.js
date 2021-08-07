@@ -1,7 +1,6 @@
 const initialState = {
 	change: {},
-	loggedInUser: {},
-	projectmanagers: []
+	loggedInUser: {}
 };
 
 const authReducer = (state = initialState, action) => {
@@ -16,16 +15,16 @@ const authReducer = (state = initialState, action) => {
 			return {
 				change: {},
 				loggedInUser: {
-					id: action.payload.user._id,
-					name: action.payload.user.name,
-					email: action.payload.user.email,
-					position: action.payload.user.position,
-					// passwordHashed: action.payload.user.passwordHashed,
-					clients: action.payload.user.clients,
-					projects: action.payload.user.projects,
-					tickets: action.payload.user.tickets
+					_id: action.payload.loggedInUser._id,
+					name: action.payload.loggedInUser.name,
+					email: action.payload.loggedInUser.email,
+					position: action.payload.loggedInUser.position,
+					// passwordHashed: action.payload.loggedInUser.passwordHashed,
 				},
-				projectmanagers: [...action.payload.projectmanagers],
+				projectmanagers: [...action.payload.loggedInUser.projectmanagers],
+				clients: [...action.payload.loggedInUser.clients],
+				projects: [...action.payload.loggedInUser.projects],
+				tickets: [...action.payload.loggedInUser.tickets],
 				loading: false,
 				error: null
 			};
@@ -33,7 +32,6 @@ const authReducer = (state = initialState, action) => {
 			return {
 				change: {},
 				loggedInUser: {},
-				projectmanagers: {},
 				loading: false,
 				error: action.payload.error
 			};
