@@ -3,13 +3,20 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AuthService from './services/auth.service';
 
+import Navigation from './components/partials/Navigation';
 import Login from './components/views/Login';
 import AdminDashboard from './components/views/AdminDashboard';
 import ProjectmanagerDetailView from './components/views/ProjectmanagerDetailView';
 import ProjectmanagerDashboard from './components/views/ProjectmanagerDashboard';
+
+import ClientsList from './components/views/ClientsList';
+import ProjectsList from './components/views/ProjectsList';
+import TicketsList from './components/views/TicketsList';
+
 import ClientDetailView from './components/views/ClientDetailView';
 import ProjectDetailView from './components/views/ProjectDetailView';
 import TicketDetailView from './components/views/TicketDetailView';
+
 
 class App extends Component {
 	service = new AuthService();
@@ -44,7 +51,6 @@ class App extends Component {
 	};
 
 	render() {
-		console.log(this.props);
 
 		let renderPosition;
 
@@ -67,6 +73,9 @@ class App extends Component {
 		}
 		return (
 			<div className="App">
+				{this.props.loggedInUser &&
+				<Navigation />
+				}
 				<Switch>
 					<Route exact path="/">
 						<Redirect to="login" />
@@ -76,6 +85,21 @@ class App extends Component {
 						exact
 						path="/projectmanager/:id"
 						component={ProjectmanagerDetailView}
+					/>
+					<Route
+						exact
+						path="/clients"
+						component={ClientsList}
+					/>
+					<Route
+						exact
+						path="/projects"
+						component={ProjectsList}
+					/>
+					<Route
+						exact
+						path="/tickets"
+						component={TicketsList}
 					/>
 					<Route
 						exact

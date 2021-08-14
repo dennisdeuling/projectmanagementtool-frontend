@@ -3,35 +3,16 @@ const initialState = {
 };
 
 const changeReducer = (state = initialState, action) => {
+	const { eventName } = action.payload ? action.payload : '';
+
 	switch (action.type) {
-		case 'HANDLE_CHANGE_EMAIL':
-			const { email } = action.payload;
-
+		case `HANDLE_CHANGE_${eventName}`:
+			const key = action.payload.eventName.toLowerCase();
 			return {
 				...state,
 				change: {
 					...state.change,
-					email: email
-				}
-			};
-		case 'HANDLE_CHANGE_PASSWORD':
-			const { password } = action.payload;
-
-			return {
-				...state,
-				change: {
-					...state.change,
-					password: password
-				}
-			};
-		case 'HANDLE_CHANGE_NAME':
-			const { name } = action.payload;
-
-			return {
-				...state,
-				change: {
-					...state.change,
-					name: name
+					[key]: action.payload[key]
 				}
 			};
 		default:

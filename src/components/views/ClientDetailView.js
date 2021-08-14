@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import handleChange from '../../redux/actions/changeActions';
 import { connect } from 'react-redux';
+import DatabaseService from '../../services/database.service';
+import { fetchModel } from '../../redux/actions/modelActions';
 
 class ClientDetailView extends Component {
 	render() {
-		const { name } = this.props.client;
+		const { name, projects } = this.props.client;
 		const {
 			streetAndHousenr: street,
 			zipCode,
 			city
 		} = this.props.client.address;
+
+		console.log(this.props);
+
 		return (
 			<div>
 				<h1>{name}</h1>
@@ -28,9 +33,7 @@ class ClientDetailView extends Component {
 const mapStateToProps = (state, ownProps) => {
 	const { id: clientId } = ownProps.match.params;
 
-	const client = state.clients.find(
-		client => client._id === clientId
-	);
+	const client = state.clients.find(client => client._id === clientId);
 	return {
 		change: state.change,
 		loggedInUser: state.loggedInUser,

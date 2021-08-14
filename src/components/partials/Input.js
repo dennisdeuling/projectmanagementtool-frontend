@@ -42,6 +42,20 @@ function Input({ ...props }) {
 					/>
 				</React.Fragment>
 			);
+		case 'textarea':
+			return (
+				<React.Fragment>
+					<label htmlFor={labelToLowerCase} className="form-label">
+						{labelToUpperCase}
+					</label>
+					<textarea
+						className="form-control"
+						id={labelToLowerCase}
+						name={labelToLowerCase}
+						onChange={props.onChange}
+					/>
+				</React.Fragment>
+			);
 		default:
 			return null;
 	}

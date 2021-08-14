@@ -1,30 +1,23 @@
 const handleChange = event => {
-	let { name, value } = event.target;
+	const { name, value } = event.target;
+	const nameUpper = name.toUpperCase();
 
-	switch (name) {
-		case 'email':
-			return {
-				type: 'HANDLE_CHANGE_EMAIL',
-				payload: {
-					[name]: value
-				}
-			};
-		case 'password':
-			return {
-				type: 'HANDLE_CHANGE_PASSWORD',
-				payload: {
-					[name]: value
-				}
-			};
-		case 'name':
-			return {
-				type: 'HANDLE_CHANGE_NAME',
-				payload: {
-					[name]: value
-				}
-			};
-		default:
-			return {};
+	try {
+		return {
+			type: `HANDLE_CHANGE_${nameUpper}`,
+			payload: {
+				eventName: nameUpper,
+				[name]: value
+			}
+		};
+	} catch (error) {
+		return {
+			type: `HANDLE_CHANGE_${nameUpper}`,
+			payload: {
+				nameUpper: nameUpper,
+				error
+			}
+		};
 	}
 };
 
