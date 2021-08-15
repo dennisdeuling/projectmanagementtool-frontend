@@ -1,6 +1,8 @@
 const initialState = {};
 
 const actionReducer = (state = initialState, action) => {
+	const { model } = action.payload ? action.payload : '';
+
 	switch (action.type) {
 		case 'ADD_REQUEST':
 			return {
@@ -10,7 +12,7 @@ const actionReducer = (state = initialState, action) => {
 		case 'ADD_SUCCESS':
 			return {
 				...state,
-				projectmanagers: [...action.payload.projectmanagers],
+				[`${model}s`]: [...action.payload.newData],
 				error: null
 			};
 		case 'ADD_ERROR':

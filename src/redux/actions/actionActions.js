@@ -1,22 +1,51 @@
 import axios from 'axios';
 import DatabaseService from '../../services/database.service';
 
-const handleAdd = () => async (dispatch, getState) => {
+const handleAdd = model => async (dispatch, getState) => {
 	dispatch({
-		type: 'ADD_REQUEST'
+		type: 'ADD_REQUEST',
+		payload: {
+			model: model
+		}
 	});
 
-	const { name, email, password } = getState().change;
-	const { _id: loggedInUserId } = getState().loggedInUser;
-	const { projectmanagers } = getState();
-
 	try {
-		const newUser = await axios.post(
-			`${process.env.REACT_APP_API_URL}/user/create`,
+		const { name, email, password, city, street, zipcode, title, description } =
+			getState().change;
+		const { projectmanagers, clients, projects, tickets } = getState();
+		const { _id: loggedInUserId } = getState().loggedInUser;
+		let value = [];
+
+		let newData = {};
+
+		switch (model) {
+			case 'user':
+				newData = { name, email, password };
+				break;
+			case 'client':
+				newData = {
+					name,
+					address: { city, streetAndHousenr: street, zipCode: zipcode }
+				};
+				value = [...clients];
+				break;
+			case 'project':
+				newData = { title, description };
+				value = [...projects];
+				break;
+			case 'ticket':
+				newData = { title, description };
+				value = [...tickets];
+				break;
+			default:
+				console.log('Something is wrong in handleAdd');
+				break;
+		}
+
+		const newDataToDatabase = await axios.post(
+			`${process.env.REACT_APP_API_URL}/${model}/create`,
 			{
-				name,
-				email,
-				password
+				newData
 			},
 			{ withCredentials: true }
 		);
@@ -25,7 +54,7 @@ const handleAdd = () => async (dispatch, getState) => {
 			`${process.env.REACT_APP_API_URL}/user/${loggedInUserId}`,
 			{
 				$push: {
-					projectmanagers: newUser.data._id
+					[`${model}s`]: newDataToDatabase.data._id
 				}
 			},
 			{
@@ -36,13 +65,15 @@ const handleAdd = () => async (dispatch, getState) => {
 		dispatch({
 			type: 'ADD_SUCCESS',
 			payload: {
-				projectmanagers: [...projectmanagers, newUser.data]
+				model: model,
+				newData: [...value, newDataToDatabase.data]
 			}
 		});
 	} catch (error) {
 		dispatch({
 			type: 'ADD_ERROR',
 			payload: {
+				model: model,
 				error
 			}
 		});

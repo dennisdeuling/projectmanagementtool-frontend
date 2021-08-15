@@ -6,14 +6,17 @@ import { handleAdd } from '../../redux/actions/actionActions';
 import { connect } from 'react-redux';
 
 class AddNew extends Component {
-	addNew = () => {};
+	addNew = event => {
+		event.preventDefault();
+		const model = this.props.match.path.replace(/\/|s/g, '')
+		this.props.handleAdd(model);
+	};
 	handleInputChange = event => {
 		this.props.handleChange(event);
 	};
 
 	render() {
 		const { path } = this.props.match;
-		console.log(path);
 
 		switch (path) {
 			case '/clients':
