@@ -81,29 +81,81 @@ class ProjectmanagerDashboard extends Component {
 
 		return (
 			<div>
-				<h1>Projectmanager Dashboard</h1>
-				<br />
-				<h3>Clients</h3>
-				<table className="table">
-					<TableHead
-						headline={['#', 'name', 'city', 'street', 'zipcode', 'action']}
-					/>
-					<tbody>{clients ? clientsTableBody : null}</tbody>
-				</table>
-				<br />
-				<h3>Projects</h3>
-				<table className="table">
-					<TableHead
-						headline={['#', 'title', 'description', 'tickets', 'action']}
-					/>
-					<tbody>{projects ? projectsTableBody : null}</tbody>
-				</table>
-				<br />
-				<h3>Tickets</h3>
-				<table className="table">
-					<TableHead headline={['#', 'title', 'description', 'action']} />
-					<tbody>{tickets ? ticketsTableBody : null}</tbody>
-				</table>
+				<nav>
+					<div className="nav nav-tabs" id="nav-tab" role="tablist">
+						<button
+							className="nav-link active"
+							id="nav-clients-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#nav-clients"
+							type="button"
+							role="tab"
+							aria-controls="nav-clients"
+							aria-selected="true"
+						>
+							Clients
+						</button>
+						<button
+							className="nav-link"
+							id="nav-projects-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#nav-projects"
+							type="button"
+							role="tab"
+							aria-controls="nav-projects"
+							aria-selected="false"
+						>
+							Projects
+						</button>
+						<button
+							className="nav-link"
+							id="nav-tickets-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#nav-tickets"
+							type="button"
+							role="tab"
+							aria-controls="nav-tickets"
+							aria-selected="false"
+						>
+							Tickets
+						</button>
+					</div>
+				</nav>
+				<div className="tab-content" id="nav-tabContent">
+					<div
+						className="tab-pane fade show active"
+						id="nav-clients"
+						role="tabpanel"
+						aria-labelledby="nav-clients-tab"
+					>
+						<table className="table">
+							<TableHead headline={['#', 'name', 'city', 'street', 'zipcode', 'action']} />
+							<tbody>{clients ? clientsTableBody : null}</tbody>
+						</table>
+					</div>
+					<div
+						className="tab-pane fade"
+						id="nav-projects"
+						role="tabpanel"
+						aria-labelledby="nav-projects-tab"
+					>
+						<table className="table">
+							<TableHead headline={['#', 'title', 'description', 'tickets', 'action']} />
+							<tbody>{projects ? projectsTableBody : null}</tbody>
+						</table>
+					</div>
+					<div
+						className="tab-pane fade"
+						id="nav-tickets"
+						role="tabpanel"
+						aria-labelledby="nav-tickets-tab"
+					>
+						<table className="table">
+							<TableHead headline={['#', 'title', 'description', 'action']} />
+							<tbody>{tickets ? ticketsTableBody : null}</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		);
 	}
