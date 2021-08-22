@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchModel } from '../../redux/actions/modelActions';
 import TableBody from '../partials/table/TableBody';
 import TableHead from '../partials/table/TableHead';
 
@@ -61,7 +60,7 @@ class ClientDetailView extends Component {
 							aria-controls="nav-overview"
 							aria-selected="true"
 						>
-							Overview
+							Client Overview
 						</button>
 						<button
 							className="nav-link"
@@ -188,10 +187,4 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchModel: event => dispatch(fetchModel(event))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ClientDetailView);
+export default connect(mapStateToProps)(ClientDetailView);
