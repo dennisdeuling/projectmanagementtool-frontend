@@ -13,18 +13,16 @@ const authReducer = (state = initialState, action) => {
 			};
 		case 'FETCH_USER_SUCCESS':
 			return {
-				change: {},
 				loggedInUser: {
 					_id: action.payload.loggedInUser._id,
 					name: action.payload.loggedInUser.name,
 					email: action.payload.loggedInUser.email,
 					position: action.payload.loggedInUser.position,
-					// passwordHashed: action.payload.loggedInUser.passwordHashed,
+					projectmanagers: [...action.payload.loggedInUser.projectmanagers],
+					clients: [...action.payload.loggedInUser.clients],
+					projects: [...action.payload.loggedInUser.projects],
+					tickets: [...action.payload.loggedInUser.tickets]
 				},
-				projectmanagers: [...action.payload.loggedInUser.projectmanagers],
-				clients: [...action.payload.loggedInUser.clients],
-				projects: [...action.payload.loggedInUser.projects],
-				tickets: [...action.payload.loggedInUser.tickets],
 				loading: false,
 				error: null
 			};

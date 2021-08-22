@@ -1,7 +1,9 @@
 const initialState = {};
 
 const modelReducer = (state = initialState, action) => {
-	console.log(action);
+
+	const modelLower = `${action.modelLower}s`;
+
 	switch (action.type) {
 		case `FETCH_${action.modelUpper}_REQUEST`:
 			return {
@@ -10,17 +12,16 @@ const modelReducer = (state = initialState, action) => {
 				error: null
 			};
 		case `FETCH_${action.modelUpper}_SUCCESS`:
-			console.log(action);
 			return {
 				...state,
-				[action.modelLower]: [...action.payload.newData],
+				[modelLower]: [...action.payload.newData],
 				loading: false,
 				error: null
 			};
 		case `FETCH_${action.modelUpper}_ERROR`:
 			return {
 				...state,
-				[action.modelLower]: {},
+				[modelLower]: {},
 				loading: false,
 				error: action.payload.error
 			};

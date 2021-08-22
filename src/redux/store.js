@@ -5,6 +5,7 @@ import { logger } from 'redux-logger';
 import combineRedrucer from './reducers/combineReducer';
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(logger, thunkMiddleware));
+// const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
 
 const store = createStore(combineRedrucer, composedEnhancer);
 

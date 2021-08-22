@@ -3,6 +3,7 @@ import changeReducer from './changeReducer';
 import authReducer from './authReducer';
 import actionReducer from './actionReducer';
 import userReducer from './userReducer';
+import modelReducer from './modelReducer';
 
 const initialState = {
 	change: {}
@@ -13,7 +14,8 @@ const rootReducer = reduceReducers(
 	changeReducer,
 	authReducer,
 	actionReducer,
-	userReducer
+	userReducer,
+	modelReducer
 );
 
 export default rootReducer;

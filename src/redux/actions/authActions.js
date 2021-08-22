@@ -15,18 +15,6 @@ const fetchUser = () => async (dispatch, getState) => {
 			`${process.env.REACT_APP_API_URL}/user/${login._id}`
 		);
 
-		const projectmanager = user.data.projectmanagers.map(projectmanager => {
-			const {_id, name, email, position, clients, projects, tickets } = projectmanager
-			return {
-				_id,
-				name,
-				email,
-				position,
-				clients,
-				projects,
-				tickets
-			}
-		})
 		dispatch({
 			type: 'FETCH_USER_SUCCESS',
 			payload: {

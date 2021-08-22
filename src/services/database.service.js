@@ -5,7 +5,7 @@ class DatabaseService {
 		model = model.toLowerCase();
 		switch (model) {
 			case 'user':
-			case'projectmanager':
+			case 'projectmanager':
 				this.apiUrl = `${process.env.REACT_APP_API_URL}/user`;
 				break;
 			case 'client':
@@ -25,7 +25,7 @@ class DatabaseService {
 
 	getAll = () => {
 		return axios
-			.get(this.apiUrl)
+			.get(`${this.apiUrl}`)
 			.then(response => response.data)
 			.catch(error => error);
 	};
@@ -40,6 +40,15 @@ class DatabaseService {
 	deleteOne = id => {
 		return axios
 			.delete(`${this.apiUrl}/${id}`)
+			.then(response => response.data)
+			.catch(error => error);
+	};
+
+	findModelByUserId = (userId, model) => {
+		// TODO: MAKE A HELPER FUNCTION
+		model = model.charAt(0).toUpperCase() + model.slice(1);
+		return axios
+			.get(`${this.apiUrl}/find${model}ByUserId/${userId}`)
 			.then(response => response.data)
 			.catch(error => error);
 	};

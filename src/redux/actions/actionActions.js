@@ -12,7 +12,7 @@ const handleAdd = model => async (dispatch, getState) => {
 	try {
 		const { name, email, password, city, street, zipcode, title, description } =
 			getState().change;
-		const { projectmanagers, clients, projects, tickets } = getState();
+		const { clients, projects, tickets } = getState();
 		const { _id: loggedInUserId } = getState().loggedInUser;
 		let value = [];
 
