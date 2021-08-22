@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import handleChange from '../../redux/actions/changeActions';
-import { fetchProjectmanager } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 
 class ProjectmanagerDetailView extends Component {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TableBody from '../partials/table/TableBody';
 import TableHead from '../partials/table/TableHead';
 import { handleDelete } from '../../redux/actions/actionActions';
-import { fetchModel, findByUserId } from '../../redux/actions/modelActions';
+import { findByUserId } from '../../redux/actions/modelActions';
 
 class ProjectmanagerDashboard extends Component {
 	componentDidMount() {

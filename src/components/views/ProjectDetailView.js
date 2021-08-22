@@ -5,8 +5,6 @@ import TableHead from '../partials/table/TableHead';
 
 class ClientDetailView extends Component {
 	render() {
-		console.log(this.props.projectView);
-
 		const { tickets } = this.props.projectView;
 
 		const { title, description } = this.props.projectView.project;
