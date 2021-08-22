@@ -1,20 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchModel } from '../../redux/actions/modelActions';
+import TableBody from '../partials/table/TableBody';
+import TableHead from '../partials/table/TableHead';
 
 class ClientDetailView extends Component {
-	componentDidMount() {
-		const data = { idArray: this.props.client.projects, model: 'project' };
-		this.props.fetchModel(data);
-	}
-
 	render() {
-		const { name } = this.props.client;
+		console.log(this.props);
+
+		const { projects, tickets } = this.props.clientView;
+
+		const { name } = this.props.clientView.client;
 		const {
 			streetAndHousenr: street,
 			zipCode,
 			city
-		} = this.props.client.address;
+		} = this.props.clientView.client.address;
+
+		const projectsTableBody = projects.map((project, index) => {
+			const { _id: id, title, description, tickets } = project;
+			const amountOfTickets = tickets.length;
+			return (
+				<TableBody
+					model="project"
+					index={index + 1}
+					id={id}
+					title={title}
+					description={description}
+					amountOfTickets={amountOfTickets}
+					onClick={() => this.deleteData(id, 'project')}
+				/>
+			);
+		});
+
+		const ticketsTableBody = tickets.map((ticket, index) => {
+			const { _id: id, title, description } = ticket;
+			return (
+				<TableBody
+					model="ticket"
+					index={index + 1}
+					id={id}
+					title={title}
+					description={description}
+					onClick={() => this.deleteData(id, 'ticket')}
+				/>
+			);
+		});
 
 		return (
 			<div>
@@ -105,11 +136,12 @@ class ClientDetailView extends Component {
 						role="tabpanel"
 						aria-labelledby="nav-projects-tab"
 					>
-						This is some placeholder content the Home tab's associated content.
-						Clicking another tab will toggle the visibility of this one for the
-						next. The tab JavaScript swaps classes to control the content
-						visibility and styling. You can use it with tabs, pills, and any
-						other .nav-powered navigation.
+						<table className="table">
+							<TableHead
+								headline={['#', 'title', 'description', 'tickets', 'action']}
+							/>
+							<tbody>{projectsTableBody}</tbody>
+						</table>
 					</div>
 					<div
 						className="tab-pane fade"
@@ -117,11 +149,10 @@ class ClientDetailView extends Component {
 						role="tabpanel"
 						aria-labelledby="nav-tickets-tab"
 					>
-						This is some placeholder content the Home tab's associated content.
-						Clicking another tab will toggle the visibility of this one for the
-						next. The tab JavaScript swaps classes to control the content
-						visibility and styling. You can use it with tabs, pills, and any
-						other .nav-powered navigation.
+						<table className="table">
+							<TableHead headline={['#', 'title', 'description', 'action']} />
+							<tbody>{ticketsTableBody}</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -133,10 +164,27 @@ const mapStateToProps = (state, ownProps) => {
 	const { id: clientId } = ownProps.match.params;
 
 	const client = state.clients.find(client => client._id === clientId);
+
+	const { projects: projectId } = client;
+	const projects = state.projects.filter(project =>
+		projectId.includes(project._id)
+	);
+
+	const ticketIds = [];
+	projects.forEach(project =>
+		project.tickets.forEach(ticket => ticketIds.push(ticket))
+	);
+	const tickets = state.tickets.filter(ticket =>
+		ticketIds.includes(ticket._id)
+	);
+
 	return {
-		change: state.change,
 		loggedInUser: state.loggedInUser,
-		client: client
+		clientView: {
+			client: client,
+			projects: projects,
+			tickets: tickets
+		}
 	};
 };
 

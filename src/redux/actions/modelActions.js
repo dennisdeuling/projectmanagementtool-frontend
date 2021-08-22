@@ -1,7 +1,7 @@
 import DatabaseService from '../../services/database.service';
 
 const fetchModel = data => (dispatch, getState) => {
-	const { idArray, model } = data;
+	const { ids, model } = data;
 	const modelUpper = model.toUpperCase();
 	const modelLower = model.toLowerCase();
 
@@ -14,10 +14,15 @@ const fetchModel = data => (dispatch, getState) => {
 
 		const newData = [];
 
-		idArray.forEach(id => {
-			let data = fetchModel.getOne(id);
+		if (ids.length < 1) {
+			ids.forEach(id => {
+				let data = fetchModel.getOne(id);
+				data.then(response => newData.push(response));
+			});
+		} else {
+			let data = fetchModel.getOne(ids);
 			data.then(response => newData.push(response));
-		});
+		}
 
 		dispatch({
 			type: `FETCH_${modelUpper}_SUCCESS`,
