@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../partials/Input';
 import Button from '../partials/Button';
-import handleChange from '../../redux/actions/changeActions';
+import { handleChange } from '../../redux/actions/changeActions';
 import { handleAdd } from '../../redux/actions/actionActions';
 import { connect } from 'react-redux';
 

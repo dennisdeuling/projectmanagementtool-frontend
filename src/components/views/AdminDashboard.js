@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import handleChange from '../../redux/actions/changeActions';
+import { handleChange } from '../../redux/actions/changeActions';
 import { handleAdd, handleDelete } from '../../redux/actions/actionActions';
 
 import Button from '../partials/Button';

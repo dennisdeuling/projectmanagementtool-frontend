@@ -49,7 +49,7 @@
     "useTabs": true,
     "jsxSingleQuote": false,
     "jsxBracketSameLine": false,
-    "printWidth": 80,
+    "printWidth": 100,
     "arrowParens": "avoid"
   },
   "devDependencies": {

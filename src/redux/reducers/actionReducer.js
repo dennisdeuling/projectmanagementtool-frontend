@@ -1,6 +1,4 @@
-const initialState = {};
-
-const actionReducer = (state = initialState, action) => {
+const actionReducer = (state, action) => {
 	const { model } = action.payload ? action.payload : '';
 
 	switch (action.type) {
@@ -16,6 +14,22 @@ const actionReducer = (state = initialState, action) => {
 				error: null
 			};
 		case 'ADD_ERROR':
+			return {
+				...state,
+				error: action.payload.error
+			};
+		case 'EDIT_REQUEST':
+			return {
+				...state,
+				error: null
+			};
+		case 'EDIT_SUCCESS':
+			return {
+				...state,
+				change: action.payload.newData,
+				error: null
+			};
+		case 'EDIT_ERROR':
 			return {
 				...state,
 				error: action.payload.error

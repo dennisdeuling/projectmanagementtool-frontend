@@ -1,8 +1,4 @@
-const initialState = {
-	change: {}
-};
-
-const changeReducer = (state = initialState, action) => {
+const changeReducer = (state, action) => {
 	const { eventName } = action.payload ? action.payload : '';
 
 	switch (action.type) {
@@ -15,6 +11,11 @@ const changeReducer = (state = initialState, action) => {
 					[key]: action.payload[key]
 				}
 			};
+			case 'SET_CHANGE_DATA':
+				return {
+					...state,
+					change: action.payload.change
+				};
 		default:
 			return state;
 	}

@@ -5,9 +5,7 @@ import actionReducer from './actionReducer';
 import userReducer from './userReducer';
 import modelReducer from './modelReducer';
 
-const initialState = {
-	change: {}
-};
+const initialState = {};
 
 const rootReducer = reduceReducers(
 	initialState,

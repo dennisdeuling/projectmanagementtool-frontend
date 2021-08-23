@@ -2,13 +2,11 @@ import React from 'react';
 
 function Input({ ...props }) {
 	// TODO: Make a Helperfunction
-	const { inputType, label } = props;
+	const { inputType, label, value } = props;
 	const inputTypeToLowerCase = inputType.toLowerCase();
-	const inputTypeToUpperCase =
-		inputType.charAt(0).toUpperCase() + inputType.slice(1);
-	const labelToLowerCase = label ? label.toLowerCase() : ''
-	const labelToUpperCase = label ?
-		label.charAt(0).toUpperCase() + label.slice(1) : '';
+	const inputTypeToUpperCase = inputType.charAt(0).toUpperCase() + inputType.slice(1);
+	const labelToLowerCase = label ? label.toLowerCase() : '';
+	const labelToUpperCase = label ? label.charAt(0).toUpperCase() + label.slice(1) : '';
 
 	switch (inputType) {
 		case 'email':
@@ -38,6 +36,7 @@ function Input({ ...props }) {
 						className="form-control"
 						id={labelToLowerCase}
 						name={labelToLowerCase}
+						value={value}
 						onChange={props.onChange}
 					/>
 				</React.Fragment>
@@ -52,6 +51,7 @@ function Input({ ...props }) {
 						className="form-control"
 						id={labelToLowerCase}
 						name={labelToLowerCase}
+						value={value}
 						onChange={props.onChange}
 					/>
 				</React.Fragment>

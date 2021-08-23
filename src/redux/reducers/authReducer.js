@@ -1,9 +1,4 @@
-const initialState = {
-	change: {},
-	loggedInUser: {}
-};
-
-const authReducer = (state = initialState, action) => {
+const authReducer = (state, action) => {
 	switch (action.type) {
 		case 'FETCH_USER_REQUEST':
 			return {

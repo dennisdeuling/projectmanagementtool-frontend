@@ -10,8 +10,7 @@ const handleAdd = model => async (dispatch, getState) => {
 	});
 
 	try {
-		const { name, email, password, city, street, zipcode, title, description } =
-			getState().change;
+		const { name, email, password, city, street, zipcode, title, description } = getState().change;
 		const { clients, projects, tickets } = getState();
 		const { _id: loggedInUserId } = getState().loggedInUser;
 		let value = [];
@@ -80,6 +79,85 @@ const handleAdd = model => async (dispatch, getState) => {
 	}
 };
 
+const handleUpdate = model => (dispatch, getState) => {
+	dispatch({
+		type: 'EDIT_REQUEST',
+		payload: {
+			model: model
+		}
+	});
+
+	const {
+		_id: modelId,
+		name,
+		email,
+		password,
+		city,
+		street,
+		zipcode,
+		title,
+		description
+	} = getState().change;
+
+	let newData = {};
+
+	switch (model) {
+		case 'user':
+			newData = { name, email, password };
+			break;
+		case 'client':
+			newData = {
+				name,
+				address: { city, streetAndHousenr: street, zipCode: zipcode }
+			};
+			break;
+		case 'project':
+			newData = { title, description };
+			break;
+		case 'ticket':
+			newData = { title, description };
+			break;
+		default:
+			console.log('Something is wrong in handleAdd');
+			break;
+	}
+
+	axios
+		.put(
+			`${process.env.REACT_APP_API_URL}/${model}/${modelId}`,
+			{
+				newData
+			},
+			{ withCredentials: true }
+		)
+		.then(data => {
+			const { _id, name } = data.data;
+			const { streetAndHousenr: street, zipCode: zipcode, city } = data.data.address;
+			dispatch({
+				type: 'EDIT_SUCCESS',
+				payload: {
+					model: model,
+					newData: {
+						_id,
+						name,
+						street,
+						zipcode,
+						city
+					}
+				}
+			});
+		})
+		.catch(error => {
+			dispatch({
+				type: 'EDIT_ERROR',
+				payload: {
+					model: model,
+					error
+				}
+			});
+		});
+};
+
 const handleDelete = data => async (dispatch, getState) => {
 	const { id, model } = data;
 	dispatch({
@@ -114,4 +192,4 @@ const handleDelete = data => async (dispatch, getState) => {
 	}
 };
 
-export { handleAdd, handleDelete };
+export { handleAdd, handleUpdate, handleDelete };

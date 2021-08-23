@@ -14,7 +14,7 @@ class ProjectmanagerDashboard extends Component {
 
 	render() {
 		const { clients } = this.props;
-		console.log(this.props)
+		console.log(this.props);
 
 		const clientsTableBody = clients.map((client, index) => {
 			const { _id: id, name } = client;
@@ -43,7 +43,7 @@ class ProjectmanagerDashboard extends Component {
 					<tbody>{clientsTableBody}</tbody>
 				</table>
 				<hr />
-				<AddNew match={this.props.match}/>
+				<AddNew match={this.props.match} />
 			</div>
 		);
 	}

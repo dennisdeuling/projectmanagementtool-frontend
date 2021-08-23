@@ -21,4 +21,32 @@ const handleChange = event => {
 	}
 };
 
-export default handleChange;
+const initialChange = data => {
+	const { _id, name, street, zipCode, city } = data;
+
+	try {
+		return {
+			type: 'SET_CHANGE_DATA',
+			payload: {
+				change: {
+					_id,
+					name,
+					street,
+					zipCode,
+					city
+				}
+			}
+		};
+	} catch (error) {
+		return {
+			type: 'SET_CHANGE_DATA',
+			payload: {
+				change: {
+					error
+				}
+			}
+		};
+	}
+};
+
+export { handleChange, initialChange };
