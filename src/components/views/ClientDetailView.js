@@ -9,6 +9,7 @@ import Input from '../partials/Input';
 class ClientDetailView extends Component {
 	componentDidMount() {
 		const data = {
+			model: 'client',
 			_id: this.props.clientView.client._id,
 			name: this.props.clientView.client.name,
 			street: this.props.clientView.client.address.streetAndHousenr,
@@ -19,7 +20,6 @@ class ClientDetailView extends Component {
 	}
 
 	handleUpdate = event => {
-		console.error('update')
 		event.preventDefault();
 		this.props.handleUpdate('client');
 	};
@@ -33,7 +33,6 @@ class ClientDetailView extends Component {
 	};
 
 	render() {
-		// console.log(this.props);
 		const { projects, tickets } = this.props.clientView;
 
 		const { name, street, zipcode, city } = this.props.change;

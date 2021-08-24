@@ -112,13 +112,11 @@ const handleUpdate = model => (dispatch, getState) => {
 			};
 			break;
 		case 'project':
-			newData = { title, description };
-			break;
 		case 'ticket':
 			newData = { title, description };
 			break;
 		default:
-			console.log('Something is wrong in handleAdd');
+			console.log('Something is wrong in update - Data');
 			break;
 	}
 
@@ -131,21 +129,45 @@ const handleUpdate = model => (dispatch, getState) => {
 			{ withCredentials: true }
 		)
 		.then(data => {
-			const { _id, name } = data.data;
-			const { streetAndHousenr: street, zipCode: zipcode, city } = data.data.address;
-			dispatch({
-				type: 'EDIT_SUCCESS',
-				payload: {
-					model: model,
-					newData: {
-						_id,
-						name,
-						street,
-						zipcode,
-						city
-					}
-				}
-			});
+			const { _id } = data.data;
+
+			switch (model) {
+				case 'client':
+					const { name } = data.data;
+					const { streetAndHousenr: street, zipCode: zipcode, city } = data.data.address;
+					dispatch({
+						type: 'EDIT_SUCCESS',
+						payload: {
+							model: model,
+							newData: {
+								_id,
+								name,
+								street,
+								zipcode,
+								city
+							}
+						}
+					});
+					break;
+				case 'project':
+				case 'ticket':
+					const { title, description } = data.data;
+					dispatch({
+						type: 'EDIT_SUCCESS',
+						payload: {
+							model: model,
+							newData: {
+								_id,
+								title,
+								description
+							}
+						}
+					});
+					break;
+				default:
+					console.log('Something is wrong in update - Promise');
+					break;
+			}
 		})
 		.catch(error => {
 			dispatch({

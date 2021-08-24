@@ -21,22 +21,39 @@ const handleChange = event => {
 	}
 };
 
-const initialChange = data => {
-	const { _id, name, street, zipCode, city } = data;
+const initialChange = (data) => {
+	const { model } = data;
 
 	try {
-		return {
-			type: 'SET_CHANGE_DATA',
-			payload: {
-				change: {
-					_id,
-					name,
-					street,
-					zipCode,
-					city
-				}
-			}
-		};
+		switch (model) {
+			case 'client':
+				return {
+					type: 'SET_CHANGE_DATA',
+					payload: {
+						change: {
+							_id: data._id,
+							name: data.name,
+							street: data.street,
+							zipCode: data.zipCode,
+							city: data.city
+						}
+					}
+				};
+			case 'project':
+			case 'ticket':
+				return {
+					type: 'SET_CHANGE_DATA',
+					payload: {
+						change: {
+							_id: data._id,
+							title: data.title,
+							description: data.description
+						}
+					}
+				};
+			default:
+				break;
+		}
 	} catch (error) {
 		return {
 			type: 'SET_CHANGE_DATA',

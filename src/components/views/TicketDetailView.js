@@ -1,9 +1,99 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Input from '../partials/Input';
+import { handleChange, initialChange } from '../../redux/actions/changeActions';
+import { handleUpdate } from '../../redux/actions/actionActions';
 
-class ClientDetailView extends Component {
+class TicketDetailView extends Component {
+	componentDidMount() {
+		const data = {
+			model: 'ticket',
+			_id: this.props.ticketView.ticket._id,
+			title: this.props.ticketView.ticket.title,
+			description: this.props.ticketView.ticket.description
+		};
+		this.props.initialChange(data);
+	}
+
+	handleUpdate = event => {
+		event.preventDefault();
+		this.props.handleUpdate('ticket');
+	};
+
+	handleEdit = event => {
+		this.props.handleChange(event);
+	};
+
+	handleInputChange = event => {
+		this.props.handleChange(event);
+	};
+
 	render() {
-		const { title, description } = this.props.ticketView.ticket;
+		const { title, description } = this.props.change;
+
+		let ticket;
+
+		if (this.props.change.edit) {
+			ticket = (
+				<React.Fragment>
+					<form onSubmit={this.handleUpdate}>
+						<button
+							type="submit"
+							name="edit"
+							value="false"
+							className="btn btn-primary"
+							onClick={event => this.handleEdit(event)}
+						>
+							<i className="fas fa-save" />
+							Save
+						</button>
+						<div className="row">
+							<h1>
+								<Input
+									inputType="text"
+									label="title"
+									value={title}
+									onChange={event => this.handleInputChange(event)}
+								/>
+							</h1>
+							<dl className="row">
+								<dt className="col-sm-3">Description</dt>
+								<dd className="col-sm-9">
+									<Input
+										inputType="text"
+										label="description"
+										value={description}
+										onChange={event => this.handleInputChange(event)}
+									/>
+								</dd>
+							</dl>
+						</div>
+					</form>
+				</React.Fragment>
+			);
+		} else {
+			ticket = (
+				<React.Fragment>
+					<button
+						type="button"
+						name="edit"
+						value="true"
+						className="btn btn-primary"
+						onClick={event => this.handleEdit(event)}
+					>
+						<i className="fas fa-edit" />
+						Edit
+					</button>
+					<div className="row">
+						<h1>Title: {title}</h1>
+						<dl className="row">
+							<dt className="col-sm-3">Description</dt>
+							<dd className="col-sm-9">{description}</dd>
+						</dl>
+					</div>
+				</React.Fragment>
+			);
+		}
 
 		return (
 			<div>
@@ -30,15 +120,7 @@ class ClientDetailView extends Component {
 						role="tabpanel"
 						aria-labelledby="nav-ticket-tab"
 					>
-						<div className="row">
-							<h1>Title: {title}</h1>
-							<dl className="row">
-								<dt className="col-sm-3">Description</dt>
-								<dd className="col-sm-9">
-									{description}
-								</dd>
-							</dl>
-						</div>
+						{ticket}
 					</div>
 				</div>
 			</div>
@@ -52,10 +134,19 @@ const mapStateToProps = (state, ownProps) => {
 
 	return {
 		loggedInUser: state.loggedInUser,
+		change: state.change ?? false,
 		ticketView: {
 			ticket: ticket
 		}
 	};
 };
 
-export default connect(mapStateToProps)(ClientDetailView);
+const mapDispatchToProps = dispatch => {
+	return {
+		initialChange: event => dispatch(initialChange(event)),
+		handleChange: event => dispatch(handleChange(event)),
+		handleUpdate: event => dispatch(handleUpdate(event))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketDetailView);
