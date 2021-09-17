@@ -129,11 +129,25 @@ const handleUpdate = model => (dispatch, getState) => {
 			{ withCredentials: true }
 		)
 		.then(data => {
-			const { _id } = data.data;
+			console.log(data)
+			const { _id, name } = data.data;
 
 			switch (model) {
+				case 'user':
+					const { email } = data.data;
+					dispatch({
+						type: 'EDIT_SUCCESS',
+						payload: {
+							model: model,
+							newData: {
+								_id,
+								name,
+								email
+							}
+						}
+					});
+					break;
 				case 'client':
-					const { name } = data.data;
 					const { streetAndHousenr: street, zipCode: zipcode, city } = data.data.address;
 					dispatch({
 						type: 'EDIT_SUCCESS',

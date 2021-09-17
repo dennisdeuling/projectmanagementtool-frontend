@@ -20,7 +20,7 @@ class AdminDashboard extends Component {
 
 	addNewProjectmanager = event => {
 		event.preventDefault();
-		this.props.handleAdd(event);
+		this.props.handleAdd('user');
 	};
 
 	render() {

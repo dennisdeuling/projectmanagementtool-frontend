@@ -26,6 +26,17 @@ const initialChange = (data) => {
 
 	try {
 		switch (model) {
+			case 'user':
+				return {
+					type: 'SET_CHANGE_DATA',
+					payload: {
+						change: {
+							_id: data._id,
+							name: data.name,
+							email: data.email
+						}
+					}
+				};
 			case 'client':
 				return {
 					type: 'SET_CHANGE_DATA',

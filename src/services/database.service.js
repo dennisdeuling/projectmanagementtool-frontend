@@ -53,6 +53,13 @@ class DatabaseService {
 			.catch(error => error);
 	};
 
+	findByIdAndUpdate = (id, newData) => {
+		return axios
+			.put(`${this.apiUrl}/${id}`, { ...newData })
+			.then(data => data)
+			.catch(error => error);
+	};
+
 	// TODO: Have to push data for the update
 	updateOne = id => {
 		return axios

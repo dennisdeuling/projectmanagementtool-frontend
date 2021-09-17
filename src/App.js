@@ -8,6 +8,7 @@ import Login from './components/views/Login';
 import AdminDashboard from './components/views/AdminDashboard';
 import ProjectmanagerDetailView from './components/views/ProjectmanagerDetailView';
 import ProjectmanagerDashboard from './components/views/ProjectmanagerDashboard';
+import UserProfile from './components/views/UserProfile'
 
 import ClientsList from './components/views/ClientsList';
 import ProjectsList from './components/views/ProjectsList';
@@ -86,20 +87,25 @@ class App extends Component {
 						path="/projectmanager/:id"
 						component={ProjectmanagerDetailView}
 					/>
+					{/*<Route*/}
+					{/*	exact*/}
+					{/*	path="/clients"*/}
+					{/*	component={ClientsList}*/}
+					{/*/>*/}
+					{/*<Route*/}
+					{/*	exact*/}
+					{/*	path="/projects"*/}
+					{/*	component={ProjectsList}*/}
+					{/*/>*/}
+					{/*<Route*/}
+					{/*	exact*/}
+					{/*	path="/tickets"*/}
+					{/*	component={TicketsList}*/}
+					{/*/>*/}
 					<Route
 						exact
-						path="/clients"
-						component={ClientsList}
-					/>
-					<Route
-						exact
-						path="/projects"
-						component={ProjectsList}
-					/>
-					<Route
-						exact
-						path="/tickets"
-						component={TicketsList}
+						path="/profile"
+						component={UserProfile}
 					/>
 					<Route
 						exact
